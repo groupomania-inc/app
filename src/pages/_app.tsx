@@ -15,7 +15,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
     useEffect(() => {
         getSession().then(async (session) => {
-            if (!session?.user) await router.push("/auth/sign-in");
+            if (session?.user) return;
+            if (router.route === "/auth/sign-in" || router.route === "/auth/sign-up") return;
+
+            await router.push("/auth/sign-in");
         });
     });
 
