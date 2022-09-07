@@ -3,14 +3,24 @@ import "../styles/globals.scss";
 
 import { withTRPC } from "@trpc/next";
 import type { AppType } from "next/dist/shared/lib/utils";
-import { SessionProvider } from "next-auth/react";
+import { useRouter } from "next/router";
+import { getSession, SessionProvider } from "next-auth/react";
+import { useEffect } from "react";
 import superjson from "superjson";
 
 import type { AppRouter } from "../server/router";
 
-const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
+const MyApp: AppType = ({ Component, pageProps }) => {
+    const router = useRouter();
+
+    useEffect(() => {
+        getSession().then(async (session) => {
+            if (!session?.user) await router.push("/auth/sign-in");
+        });
+    });
+
     return (
-        <SessionProvider session={session}>
+        <SessionProvider session={pageProps.session}>
             <Component {...pageProps} />
         </SessionProvider>
     );
