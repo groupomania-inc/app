@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { SignUpInput, signUpSchema } from "../../schemas/auth";
+import { SignUpInput, signUpSchema } from "../../schemas/auth.schema";
 import { trpc } from "../../utils/trpc";
 
 const SignUpPage: NextPage = () => {
@@ -13,7 +13,7 @@ const SignUpPage: NextPage = () => {
         resolver: zodResolver(signUpSchema),
     });
 
-    const { mutate, error } = trpc.useMutation(["auth.signup"], {
+    const { mutate, error } = trpc.useMutation(["users.new"], {
         onSuccess: () => {
             router.push("/auth/sign-in");
         },

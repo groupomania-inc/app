@@ -6,7 +6,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { SignInInput, signInSchema } from "../../schemas/auth";
+import { SignInInput, signInSchema } from "../../schemas/auth.schema";
 
 const SignInPage: NextPage = () => {
     const router = useRouter();
