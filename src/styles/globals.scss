@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.test {
-    background: #000;
+html,
+body {
+    margin: 0;
 }
