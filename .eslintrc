@@ -6,7 +6,8 @@
     "plugins": [
         "@typescript-eslint",
         "prettier",
-        "simple-import-sort"
+        "simple-import-sort",
+        "tailwindcss"
     ],
     "extends": [
         "eslint:recommended",
@@ -15,11 +16,17 @@
         "plugin:react/recommended",
         "next",
         "next/core-web-vitals",
-        "prettier"
+        "prettier",
+        "plugin:tailwindcss/recommended"
     ],
     "rules": {
         "prettier/prettier": 2,
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error"
+    },
+    "settings": {
+        "tailwindcss": {
+            "config": "tailwind.config.cjs"
+        }
     }
 }
