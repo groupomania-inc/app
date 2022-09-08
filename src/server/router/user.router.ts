@@ -27,12 +27,12 @@ export const usersRouter = createRouter()
                     if (e.code === "P2002")
                         throw new TRPCError({
                             code: "CONFLICT",
-                            message: "A user with this email already exist",
+                            message: "Un utilisateur avec cet email existe déjà",
                         });
 
                 throw new TRPCError({
                     code: "INTERNAL_SERVER_ERROR",
-                    message: "Something went wrong...",
+                    message: "Quelque chose s'est mal passé...",
                 });
             }
         },
