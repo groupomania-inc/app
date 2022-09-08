@@ -20,4 +20,8 @@ export default defineNextConfig({
         config.plugins.push(new StylelintPlugin({ fix: true }));
         return config;
     },
+    i18n: {
+        locales: ["fr"],
+        defaultLocale: "fr",
+    },
 });
