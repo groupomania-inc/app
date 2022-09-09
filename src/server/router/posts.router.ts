@@ -33,12 +33,13 @@ export const postsRouter = createRouter()
         },
     })
     .query("get-all", {
-        resolve: async ({ ctx }) => await ctx.prisma.post.findMany({
-            include: {
-                Likes: true,
-                User: true,
-            },
-        })
+        resolve: async ({ ctx }) =>
+            await ctx.prisma.post.findMany({
+                include: {
+                    Likes: true,
+                    User: true,
+                },
+            }),
     })
     .mutation("like", {
         input: likePostSchema,
