@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../components/spinners/LoadingSpinner";
 import { SignUpInput, signUpSchema } from "../../schemas/auth.schema";
 import { trpc } from "../../utils/trpc";
 

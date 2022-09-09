@@ -1,7 +1,7 @@
 import { signOut } from "next-auth/react";
 import { FunctionComponent, useState } from "react";
 
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./spinners/LoadingSpinner";
 
 const Header: FunctionComponent = () => {
     const [loadingSignout, setLoadingSignout] = useState(false);

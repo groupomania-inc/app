@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
-import FullPageLoadingSpinner from "../components/FullPageLoadingSpinner";
 import Header from "../components/Header";
-import Post from "../components/Post";
+import Post from "../components/posts/Post";
+import FullPageLoadingSpinner from "../components/spinners/FullPageLoadingSpinner";
 import { trpc } from "../utils/trpc";
 
 const HomePage: NextPage = () => {

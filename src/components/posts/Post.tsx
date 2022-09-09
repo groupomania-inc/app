@@ -2,7 +2,7 @@ import { Like, Post, User } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { FunctionComponent } from "react";
 
-import { trpc } from "../utils/trpc";
+import { trpc } from "../../utils/trpc";
 
 type PostParams = {
     post: Post & {

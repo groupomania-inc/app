@@ -7,7 +7,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../components/spinners/LoadingSpinner";
 import { SignInInput, signInSchema } from "../../schemas/auth.schema";
 
 const SignInPage: NextPage = () => {
