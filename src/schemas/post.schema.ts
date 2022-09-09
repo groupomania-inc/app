@@ -10,8 +10,6 @@ const postSchema = z.object({
     postId: z.string().uuid(),
 });
 
-export const getSinglePostSchema = postSchema.extend({});
-
 export const likePostSchema = postSchema.extend({});
 
 export const deletePostSchema = postSchema.extend({});

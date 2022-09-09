@@ -1,12 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import {
-    createPostSchema,
-    deletePostSchema,
-    getSinglePostSchema,
-    likePostSchema,
-} from "../../schemas/post.schema";
+import { createPostSchema, deletePostSchema, likePostSchema } from "../../schemas/post.schema";
 import { createRouter } from "./context";
 
 export const postsRouter = createRouter()
@@ -25,7 +20,7 @@ export const postsRouter = createRouter()
             const post = await ctx.prisma.post.create({
                 data: {
                     ...input,
-                    user: {
+                    User: {
                         connect: {
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             id: ctx.session!.user!.id,
@@ -38,13 +33,12 @@ export const postsRouter = createRouter()
         },
     })
     .query("get-all", {
-        resolve: ({ ctx }) =>
-            ctx.prisma.post.findMany({
-                include: {
-                    likes: true,
-                    user: true,
-                },
-            }),
+        resolve: async ({ ctx }) => await ctx.prisma.post.findMany({
+            include: {
+                Likes: true,
+                User: true,
+            },
+        })
     })
     .mutation("like", {
         input: likePostSchema,
@@ -58,7 +52,7 @@ export const postsRouter = createRouter()
                     id: input.postId,
                 },
                 include: {
-                    likes: true,
+                    Likes: true,
                 },
             });
             if (!post)
@@ -67,7 +61,7 @@ export const postsRouter = createRouter()
                     message: "Post not found",
                 });
 
-            const like = post.likes.find((x) => x.userId === userId);
+            const like = post.Likes.find((x) => x.userId === userId);
             if (like)
                 await ctx.prisma.like.delete({
                     where: {
@@ -77,12 +71,12 @@ export const postsRouter = createRouter()
             else {
                 await ctx.prisma.like.create({
                     data: {
-                        user: {
+                        User: {
                             connect: {
                                 id: userId,
                             },
                         },
-                        post: {
+                        Post: {
                             connect: {
                                 id: post.id,
                             },
