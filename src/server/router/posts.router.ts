@@ -1,7 +1,12 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { createPostSchema, getSinglePostSchema, likePostSchema } from "../../schemas/post.schema";
+import {
+    createPostSchema,
+    deletePostSchema,
+    getSinglePostSchema,
+    likePostSchema,
+} from "../../schemas/post.schema";
 import { createRouter } from "./context";
 
 export const postsRouter = createRouter()
@@ -33,15 +38,8 @@ export const postsRouter = createRouter()
         },
     })
     .query("get-all", {
-        resolve: ({ ctx }) => ctx.prisma.post.findMany(),
-    })
-    .query("get-single", {
-        input: getSinglePostSchema,
-        resolve: ({ ctx, input }) =>
-            ctx.prisma.post.findUnique({
-                where: {
-                    id: input.postId,
-                },
+        resolve: ({ ctx }) =>
+            ctx.prisma.post.findMany({
                 include: {
                     likes: true,
                     user: true,
@@ -94,5 +92,35 @@ export const postsRouter = createRouter()
             }
 
             return !like;
+        },
+    })
+    .mutation("delete", {
+        input: deletePostSchema,
+        resolve: async ({ ctx, input }) => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const userId = ctx.session!.user!.id;
+
+            const post = await ctx.prisma.post.findUnique({
+                where: {
+                    id: input.postId,
+                },
+            });
+            if (!post)
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Post not found",
+                });
+
+            if (post.userId !== userId)
+                throw new TRPCError({
+                    code: "FORBIDDEN",
+                    message: "You can't delete this post, it was created by an other user",
+                });
+
+            await ctx.prisma.post.delete({
+                where: {
+                    id: input.postId,
+                },
+            });
         },
     });

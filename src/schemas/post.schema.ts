@@ -6,10 +6,12 @@ export const createPostSchema = z.object({
 });
 export type CreatePostInput = z.TypeOf<typeof createPostSchema>;
 
-export const getSinglePostSchema = z.object({
+const postSchema = z.object({
     postId: z.string().uuid(),
 });
 
-export const likePostSchema = z.object({
-    postId: z.string().uuid(),
-});
+export const getSinglePostSchema = postSchema.extend({});
+
+export const likePostSchema = postSchema.extend({});
+
+export const deletePostSchema = postSchema.extend({});
