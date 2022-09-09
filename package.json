@@ -3,11 +3,11 @@
     "name": "groupomani-app",
     "version": "0.1.0",
     "scripts": {
-        "build": "eslint **/*.{cjs,mjs,ts,tsx} --fix && stylelint **/*.scss --fix && next build",
+        "build": "eslint **/*.{cjs,mjs,ts,tsx} --fix --cache && stylelint **/*.scss --fix --cache && next build",
         "dev": "next dev",
         "preinstall": "npx only-allow pnpm",
         "postinstall": "prisma generate",
-        "lint": "eslint **/*.{cjs,mjs,ts,tsx} --fix && stylelint **/*.scss --fix",
+        "lint": "eslint **/*.{cjs,mjs,ts,tsx} --fix --cache && stylelint **/*.scss --fix --cache",
         "start": "next start"
     },
     "dependencies": {
