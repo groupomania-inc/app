@@ -1,5 +1,9 @@
 import z from "zod";
 
+const postSchema = z.object({
+    postId: z.string().uuid(),
+});
+
 export const createPostSchema = z.object({
     title: z
         .string({ required_error: "Le champ titre est requis" })
@@ -13,12 +17,8 @@ export const createPostSchema = z.object({
 });
 export type CreatePostInput = z.TypeOf<typeof createPostSchema>;
 
-export const updatePostSchema = createPostSchema.extend({});
+export const updatePostSchema = createPostSchema.extend(postSchema.shape);
 export type UpdatePostInput = z.TypeOf<typeof updatePostSchema>;
-
-const postSchema = z.object({
-    postId: z.string().uuid(),
-});
 
 export const getSinglePostSchema = postSchema.extend({});
 

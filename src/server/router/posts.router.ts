@@ -6,6 +6,7 @@ import {
     deletePostSchema,
     getSinglePostSchema,
     likePostSchema,
+    updatePostSchema,
 } from "../../schemas/post.schema";
 import { createRouter } from "./context";
 
@@ -54,7 +55,7 @@ export const postsRouter = createRouter()
     .query("get-single", {
         input: getSinglePostSchema,
         resolve: async ({ ctx, input }) => {
-            const post = ctx.prisma.post.findUnique({
+            const post = await ctx.prisma.post.findUnique({
                 where: {
                     id: input.postId,
                 },
@@ -67,6 +68,26 @@ export const postsRouter = createRouter()
                 });
 
             return post;
+        },
+    })
+    .mutation("update", {
+        input: updatePostSchema,
+        resolve: async ({ ctx, input }) => {
+            const post = await ctx.prisma.post.update({
+                where: {
+                    id: input.postId,
+                },
+                data: {
+                    title: input.title,
+                    body: input.body,
+                },
+            });
+
+            if (!post)
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Post not found",
+                });
         },
     })
     .mutation("like", {
