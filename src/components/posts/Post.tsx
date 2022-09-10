@@ -69,8 +69,7 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
             <footer className="flex justify-between text-sm text-gray-600 sm:text-xs">
                 <span>@{post.User.email.split("@")[0]}</span>
                 <span>
-                    {post.createdAt.toLocaleDateString("fr-FR")}{" "}
-                    {post.createdAt.getTime() !== post.updatedAt.getTime() ? "(modifié)" : ""}
+                    {post.createdAt.toLocaleDateString("fr-FR")} {post.edited ? "(modifié)" : ""}
                 </span>
             </footer>
         </article>
