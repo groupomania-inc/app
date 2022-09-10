@@ -41,7 +41,7 @@ const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
                     <div className="flex items-center lg:order-2">
                         {showNewPostButton && (
                             <Link href="/posts/new">
-                                <p className="ml-8 inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-500">
+                                <p className="ml-8 inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-700 active:bg-primary-800">
                                     Créer un post
                                 </p>
                             </Link>
@@ -49,7 +49,7 @@ const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
                         <button
                             onClick={handleSignOut}
                             disabled={loadingSignout}
-                            className="ml-8 inline-flex h-10 w-40 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-tertiary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-tertiary-500"
+                            className="ml-8 inline-flex h-10 w-40 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-tertiary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-tertiary-500 active:bg-tertiary-600"
                         >
                             {loadingSignout ? <LoadingSpinner className="h-6" /> : "Se déconnecter"}
                         </button>
