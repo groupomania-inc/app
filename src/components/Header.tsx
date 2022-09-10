@@ -1,9 +1,14 @@
+import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { FunctionComponent, useState } from "react";
 
 import LoadingSpinner from "./spinners/LoadingSpinner";
 
-const Header: FunctionComponent = () => {
+type HeaderParams = {
+    showNewPostButton?: boolean;
+};
+
+const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
     const [loadingSignout, setLoadingSignout] = useState(false);
     const handleSignOut = async () => {
         setLoadingSignout(true);
@@ -34,9 +39,13 @@ const Header: FunctionComponent = () => {
                         </g>
                     </svg>
                     <div className="flex items-center lg:order-2">
-                        <button className="ml-8 inline-flex h-10 w-40 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-500">
-                            Créer un post
-                        </button>
+                        {showNewPostButton && (
+                            <Link href="/posts/new">
+                                <p className="ml-8 inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-500">
+                                    Créer un post
+                                </p>
+                            </Link>
+                        )}
                         <button
                             onClick={handleSignOut}
                             disabled={loadingSignout}
