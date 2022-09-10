@@ -9,19 +9,6 @@ import { trpc } from "../utils/trpc";
 const HomePage: NextPage = () => {
     const { data: posts, isLoading } = trpc.useQuery(["posts.get-all"]);
 
-    const { mutate: createPost, error: createPostError } = trpc.useMutation(["posts.new"], {
-        onSuccess: () => {
-            console.log("post created");
-        },
-    });
-
-    const handleCreateTestPost = async () => {
-        createPost({
-            title: Math.random().toString(16),
-            body: Math.random().toString(16),
-        });
-    };
-
     return (
         <>
             <Head>
@@ -29,11 +16,7 @@ const HomePage: NextPage = () => {
             </Head>
 
             <div>
-                <Header />
-
-                <button onClick={handleCreateTestPost} className="bg-red-500 p-6">
-                    Create test post
-                </button>
+                <Header showNewPostButton />
 
                 {isLoading ? (
                     <FullPageLoadingSpinner className="h-9 sm:h-8 lg:h-7" />
