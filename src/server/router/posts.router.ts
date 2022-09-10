@@ -143,7 +143,7 @@ export const postsRouter = createRouter()
         input: deletePostSchema,
         resolve: async ({ ctx, input }) => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            const userId = ctx.session!.user!.id;
+            const user = ctx.session!.user!;
 
             const post = await ctx.prisma.post.findUnique({
                 where: {
@@ -156,7 +156,7 @@ export const postsRouter = createRouter()
                     message: "Post not found",
                 });
 
-            if (post.userId !== userId)
+            if (!user.isAdmin && post.userId !== user.id)
                 throw new TRPCError({
                     code: "FORBIDDEN",
                     message: "You can't delete this post, it was created by an other user",

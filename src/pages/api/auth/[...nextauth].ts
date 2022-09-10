@@ -41,12 +41,14 @@ export const authOptions: NextAuthOptions = {
         jwt: async ({ token, user }) => {
             if (user) {
                 token.uid = user.id;
+                token.isAdmin = user.permissions === 1;
             }
             return token;
         },
         session: async ({ session, token }) => {
             if (session?.user) {
                 session.user.id = <string>token.uid;
+                session.user.isAdmin = <boolean>token.isAdmin;
             }
             return session;
         },
