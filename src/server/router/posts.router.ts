@@ -39,6 +39,11 @@ export const postsRouter = createRouter()
                     Likes: true,
                     User: true,
                 },
+                orderBy: [
+                    {
+                        createdAt: "desc",
+                    },
+                ],
             }),
     })
     .mutation("like", {
