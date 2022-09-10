@@ -1,7 +1,12 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { createPostSchema, deletePostSchema, likePostSchema } from "../../schemas/post.schema";
+import {
+    createPostSchema,
+    deletePostSchema,
+    getSinglePostSchema,
+    likePostSchema,
+} from "../../schemas/post.schema";
 import { createRouter } from "./context";
 
 export const postsRouter = createRouter()
@@ -45,6 +50,24 @@ export const postsRouter = createRouter()
                     },
                 ],
             }),
+    })
+    .query("get-single", {
+        input: getSinglePostSchema,
+        resolve: async ({ ctx, input }) => {
+            const post = ctx.prisma.post.findUnique({
+                where: {
+                    id: input.postId,
+                },
+            });
+
+            if (!post)
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Post not found",
+                });
+
+            return post;
+        },
     })
     .mutation("like", {
         input: likePostSchema,
