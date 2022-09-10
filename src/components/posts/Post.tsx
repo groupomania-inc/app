@@ -16,17 +16,22 @@ type PostParams = {
 const Post: FunctionComponent<PostParams> = ({ post }) => {
     const { data: session } = useSession();
 
-    // TODO: display error
-    const { mutate: deletePost, error: deletePostError } = trpc.useMutation(["posts.delete"], {
+    const { mutate: deletePost } = trpc.useMutation(["posts.delete"], {
         onSuccess: () => {
-            console.log("ok");
+            const postElement = document.querySelector(`#_${post.id}`);
+            if (!postElement) return;
+
+            postElement.remove();
         },
     });
 
     const handleDeletePost = async (postId: string) => deletePost({ postId });
 
     return (
-        <article className="h-fit w-full rounded-md border border-gray-200 bg-white p-3 pb-2 drop-shadow-sm">
+        <article
+            id={`_${post.id}`}
+            className="h-fit w-full rounded-md border border-gray-200 bg-white p-3 pb-2 drop-shadow-sm"
+        >
             <header className="flex h-9 w-full justify-between border-b-2 border-gray-100">
                 <h3 className="text-lg font-medium leading-6">{post.title}</h3>
 
