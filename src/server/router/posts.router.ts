@@ -80,6 +80,7 @@ export const postsRouter = createRouter()
                 data: {
                     title: input.title,
                     body: input.body,
+                    edited: true,
                 },
             });
 
