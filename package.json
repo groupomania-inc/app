@@ -1,10 +1,12 @@
 {
     "private": true,
     "name": "groupomani-app",
+    "type": "module",
     "version": "0.1.0",
     "scripts": {
-        "build": "eslint **/*.{cjs,mjs,ts,tsx} --fix --cache && stylelint **/*.scss --fix --cache && next build",
-        "dev": "next dev",
+        "setup": "node setup.mjs",
+        "build": "node setup.mjs && eslint **/*.{cjs,mjs,ts,tsx} --fix --cache && stylelint **/*.scss --fix --cache && next build",
+        "dev": "node setup.mjs && next dev",
         "preinstall": "npx only-allow pnpm",
         "postinstall": "prisma generate",
         "lint": "eslint **/*.{cjs,mjs,ts,tsx} --fix --cache && stylelint **/*.scss --fix --cache",
@@ -18,7 +20,9 @@
         "@trpc/next": "^9.27.2",
         "@trpc/react": "^9.27.2",
         "@trpc/server": "^9.27.2",
+        "@types/inquirer": "^9.0.1",
         "argon2": "^0.29.1",
+        "inquirer": "^9.1.1",
         "next": "12.2.5",
         "next-auth": "^4.10.3",
         "react": "18.2.0",
@@ -51,6 +55,7 @@
         "stylelint-prettier": "^2.0.0",
         "stylelint-webpack-plugin": "^3.3.0",
         "tailwindcss": "^3.1.8",
+        "ts-node": "^10.9.1",
         "typescript": "4.7.4"
     },
     "ct3aMetadata": {
