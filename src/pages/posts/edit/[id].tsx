@@ -33,7 +33,7 @@ const NewPostPage: NextPage = () => {
     const { formState, handleSubmit, register, reset } = useForm<UpdatePostInput>({
         resolver: zodResolver(updatePostSchema),
     });
-    const { errors } = formState;
+    const { errors, isDirty } = formState;
 
     useEffect(() => {
         reset({
@@ -43,7 +43,7 @@ const NewPostPage: NextPage = () => {
         });
     }, [reset, post]);
 
-    const onSubmit = (data: UpdatePostInput) => updatePost(data);
+    const onSubmit = (data: UpdatePostInput) => isDirty && updatePost(data);
 
     const handleCancel = async () => await router.push("/");
 
@@ -111,7 +111,7 @@ const NewPostPage: NextPage = () => {
                                     </button>
 
                                     <button
-                                        disabled={updatePostLoading}
+                                        disabled={updatePostLoading || !isDirty}
                                         className="fill-green-400 hover:fill-green-500 active:fill-green-600 disabled:fill-green-300"
                                     >
                                         {updatePostLoading ? (
