@@ -78,7 +78,6 @@ export const postsRouter = createRouter()
                     id: input.postId,
                 },
                 data: {
-                    title: input.title,
                     body: input.body,
                     edited: true,
                 },

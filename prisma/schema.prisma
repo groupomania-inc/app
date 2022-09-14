@@ -28,7 +28,6 @@ model User {
 
 model Post {
   id     String  @unique @default(uuid())
-  title  String
   body   String
   edited Boolean @default(false)
 

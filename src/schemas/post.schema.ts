@@ -5,11 +5,6 @@ const postSchema = z.object({
 });
 
 export const createPostSchema = z.object({
-    title: z
-        .string({ required_error: "Le champ titre est requis" })
-        .min(1, "Le champ titre est requis")
-        .min(4, "Le titre doit faire au minimum 4 caractères")
-        .max(32, "Le titre ne peut pas faire plus de 32 caractères"),
     body: z
         .string({ required_error: "Le champ titre est requis" })
         .min(1, "Le champ texte est requis")

@@ -47,19 +47,6 @@ const NewPostPage: NextPage = () => {
                             className="h-fit w-full rounded-md border border-gray-400 bg-white p-3 pb-2 drop-shadow-lg"
                         >
                             <p>{createPostError && createPostError.message}</p>
-                            <header
-                                className={
-                                    "h-9 w-full border-b-2 border-gray-100 " + (errors.title ? "h-14" : "")
-                                }
-                            >
-                                <input
-                                    type="text"
-                                    className="h-6 w-full text-lg font-medium"
-                                    placeholder="Titre du post..."
-                                    {...register("title")}
-                                />
-                                <p className="text-xs text-red-500">{errors.title && errors.title.message}</p>
-                            </header>
 
                             <main className="min-h-[1.6em] w-full pt-3 pb-4">
                                 <textarea
