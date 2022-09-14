@@ -76,7 +76,7 @@ const promptCallback = async (data) => {
     try {
         const hashedPassword = await hash(data.password);
 
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 email: data.email,
                 password: hashedPassword,
