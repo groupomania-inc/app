@@ -15,7 +15,6 @@ const NewPostPage: NextPage = () => {
     const router = useRouter();
     const postId = router.query.id as string;
 
-    // todo: don't redirect and show message with link "return to feed" or smth
     const {
         data: post,
         isLoading,

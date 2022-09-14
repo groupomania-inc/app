@@ -12,8 +12,6 @@ type PostParams = {
     };
 };
 
-// TODO: fix (edited)
-
 const Post: FunctionComponent<PostParams> = ({ post }) => {
     const { data: session } = useSession();
     const [userLiked, setUserLiked] = useState(false);
