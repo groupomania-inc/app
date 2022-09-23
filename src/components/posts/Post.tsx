@@ -78,7 +78,25 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
                 </div>
             </header>
 
+            <style jsx>{`
+                .img * {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+            `}</style>
+
             <main className="pt-3 pb-4">
+                {post.image && (
+                    <div className="relative w-full">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={post.image}
+                            className="max-h-[420px] w-full object-contain"
+                            alt={`Image by @${post.User.email.split("@")[0]}`}
+                        />
+                    </div>
+                )}
+
                 <p>{post.body}</p>
             </main>
 

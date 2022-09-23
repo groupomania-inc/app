@@ -24,4 +24,7 @@ export default defineNextConfig({
         locales: ["fr"],
         defaultLocale: "fr",
     },
+    images: {
+        domains: ["res.cloudinary.com"],
+    },
 });

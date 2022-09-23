@@ -15,10 +15,10 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String
-  permissions Int @default(0)
+  id          String @id @default(uuid())
+  email       String @unique
+  password    String
+  permissions Int    @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -29,6 +29,7 @@ model User {
 model Post {
   id     String  @unique @default(uuid())
   body   String
+  image  String?
   edited Boolean @default(false)
 
   createdAt DateTime @default(now())
