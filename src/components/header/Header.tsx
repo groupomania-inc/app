@@ -1,20 +1,13 @@
 import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 
-import LoadingSpinner from "./spinners/LoadingSpinner";
+import UserMenu from "./UserMenu";
 
 type HeaderParams = {
     showNewPostButton?: boolean;
 };
 
 const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
-    const [loadingSignout, setLoadingSignout] = useState(false);
-    const handleSignOut = async () => {
-        setLoadingSignout(true);
-        await signOut();
-    };
-
     return (
         <header className="w-full bg-white">
             <nav className="border-b-2 border-gray-200 px-4 py-2.5 lg:px-6">
@@ -38,7 +31,7 @@ const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
                             </switch>
                         </g>
                     </svg>
-                    <div className="flex items-center lg:order-2">
+                    <div className="flex items-center gap-3 lg:order-2">
                         {showNewPostButton && (
                             <Link href="/posts/new">
                                 <p className="ml-8 inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-700 active:bg-primary-800">
@@ -46,13 +39,14 @@ const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
                                 </p>
                             </Link>
                         )}
-                        <button
+                        {/*<button
                             onClick={handleSignOut}
                             disabled={loadingSignout}
                             className="ml-8 inline-flex h-10 w-40 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-tertiary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-tertiary-500 active:bg-tertiary-600"
                         >
                             {loadingSignout ? <LoadingSpinner className="h-6" /> : "Se déconnecter"}
-                        </button>
+                        </button>*/}
+                        <UserMenu />
                     </div>
                 </div>
             </nav>

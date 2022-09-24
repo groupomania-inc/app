@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Header from "../../components/Header";
+import Header from "../../components/header/Header";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner";
 import { CreatePostFormInput, createPostFormSchema } from "../../schemas/post.schema";
 import { trpc } from "../../utils/trpc";

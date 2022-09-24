@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import Header from "../../../components/Header";
+import Header from "../../../components/header/Header";
 import FullPageLoadingSpinner from "../../../components/spinners/FullPageLoadingSpinner";
 import LoadingSpinner from "../../../components/spinners/LoadingSpinner";
 import { UpdatePostInput, updatePostSchema } from "../../../schemas/post.schema";
