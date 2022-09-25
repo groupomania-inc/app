@@ -39,13 +39,6 @@ const Header: FunctionComponent<HeaderParams> = ({ showNewPostButton }) => {
                                 </p>
                             </Link>
                         )}
-                        {/*<button
-                            onClick={handleSignOut}
-                            disabled={loadingSignout}
-                            className="ml-8 inline-flex h-10 w-40 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-tertiary-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-tertiary-500 active:bg-tertiary-600"
-                        >
-                            {loadingSignout ? <LoadingSpinner className="h-6" /> : "Se déconnecter"}
-                        </button>*/}
                         <UserMenu />
                     </div>
                 </div>
