@@ -1,6 +1,6 @@
 import { createRouter } from "../context";
 
-export default createRouter().mutation("me", {
+export default createRouter().query("me", {
     resolve: ({ ctx }) => {
         return ctx.session?.user;
     },
