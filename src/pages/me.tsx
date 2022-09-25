@@ -195,11 +195,7 @@ const ProfilePage: NextPage = () => {
                                 onClick={onCancel}
                                 className="ml-auto inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-600 active:bg-primary-700 disabled:cursor-not-allowed disabled:bg-primary-400 disabled:hover:bg-primary-400 disabled:active:bg-primary-400"
                             >
-                                {updateUserLoading || isImageUploading ? (
-                                    <LoadingSpinner className="h-6" />
-                                ) : (
-                                    "Annuler"
-                                )}
+                                Annuler
                             </button>
                             <button
                                 disabled={!formState.isDirty || updateUserLoading || isImageUploading}
