@@ -1,9 +1,11 @@
 import { Like, Post, User } from "@prisma/client";
+import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { FunctionComponent, useEffect, useState } from "react";
 
 import { trpc } from "../../utils/trpc";
+import { formatDisplayName, formatUsername, getProfilePicture } from "../../utils/user";
 
 type PostParams = {
     post: Post & {
@@ -51,7 +53,19 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
             className="h-fit w-full rounded-md border border-gray-200 bg-white p-3 pb-2 drop-shadow-sm"
         >
             <header className="flex h-9 w-full justify-between border-b-2 border-gray-100">
-                <h3 className="font-medium leading-6">@{post.User.email.split("@")[0]}</h3>
+                <div className="flex flex-row">
+                    <div className="mr-2">
+                        <Image
+                            className="rounded-full shadow"
+                            width={30}
+                            height={30}
+                            objectFit="contain"
+                            src={getProfilePicture(post.User)}
+                            alt={`Photo de profile de ${formatDisplayName(post.User)}`}
+                        />
+                    </div>
+                    <h3 className="font-medium leading-7">{formatDisplayName(post.User)}</h3>
+                </div>
                 <div className="flex gap-3">
                     {session?.user?.id === post.userId && (
                         <Link href={`/posts/edit/${post.id}`}>
@@ -92,7 +106,7 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
                         <img
                             src={post.image}
                             className="max-h-[420px] w-full object-contain"
-                            alt={`Image by @${post.User.email.split("@")[0]}`}
+                            alt={`Image by ${formatDisplayName(post.User)}`}
                         />
                     </div>
                 )}
@@ -123,7 +137,8 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
                 </div>
 
                 <span className="leading-6">
-                    {post.createdAt.toLocaleDateString("fr-FR")} {post.edited ? "(modifié)" : ""}
+                    {formatUsername(post.User)} • {post.createdAt.toLocaleDateString("fr-FR")}{" "}
+                    {post.edited ? "(modifié)" : ""}
                 </span>
             </footer>
         </article>
