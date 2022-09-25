@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 import Header from "../components/header/Header";
 import Post from "../components/posts/Post";
@@ -20,7 +21,7 @@ const HomePage: NextPage = () => {
 
                 {isLoading ? (
                     <FullPageLoadingSpinner className="h-9 sm:h-8 lg:h-7" />
-                ) : (
+                ) : posts && posts?.length > 0 ? (
                     <section role={"main"} className="flex w-full justify-center">
                         <nav className="my-6 flex w-11/12 flex-col gap-6 sm:w-5/6 md:w-4/5 lg:w-3/5 xl:w-1/2">
                             {posts?.map((post) => (
@@ -28,6 +29,17 @@ const HomePage: NextPage = () => {
                             ))}
                         </nav>
                     </section>
+                ) : (
+                    <div className="fixed top-0 flex h-screen w-screen items-center justify-center">
+                        <p className="text-center">
+                            Personne n&#39;a encore publié de post... <br />
+                            <Link href="/posts/new">
+                                <span className="cursor-pointer hover:underline">
+                                    Soyez la première personne a le faire !
+                                </span>
+                            </Link>
+                        </p>
+                    </div>
                 )}
             </div>
         </>
