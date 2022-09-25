@@ -16,6 +16,7 @@ export default createRouter().mutation("new", {
             const user = await ctx.prisma.user.create({
                 data: {
                     email,
+                    username: email.split("@")[0] + "",
                     password: hashedPassword,
                 },
             });

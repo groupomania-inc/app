@@ -50,6 +50,10 @@ const askPrompt = () =>
             name: "email",
             message: "Entrez l'adresse email:",
             type: "input",
+            validate: (email) =>
+                /^(?!\.)[\w\-_.]*[^.]@groupomania\.com$/.test(email)
+                    ? true
+                    : "Format attendu: email@groupomania.com",
         },
         {
             name: "password",
@@ -79,6 +83,7 @@ const promptCallback = async (data) => {
         await prisma.user.create({
             data: {
                 email: data.email,
+                username: data.email.split("@")[0],
                 password: hashedPassword,
                 permissions: 1,
             },

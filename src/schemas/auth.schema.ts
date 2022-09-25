@@ -4,7 +4,10 @@ export const signInSchema = z.object({
     email: z
         .string()
         .min(1, "Le champ email est requis")
-        .email("Le champ email doit être au format user@domain.com"),
+        .regex(
+            /^(?!\.)[\w\-_.]*[^.]@groupomania\.com$/,
+            "Le champ email doit être au format email@groupomania.com",
+        ),
     password: z
         .string()
         .min(1, "Le champ mot de passe est requis")

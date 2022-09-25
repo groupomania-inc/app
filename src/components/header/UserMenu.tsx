@@ -1,10 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { FunctionComponent, useEffect, useState } from "react";
 
+import { trpc } from "../../utils/trpc";
 import LoadingSpinner from "../spinners/LoadingSpinner";
 
 const UserMenu: FunctionComponent = () => {
+    const { data: user } = trpc.useQuery(["users.me"]);
     const [loadingSignout, setLoadingSignout] = useState<boolean>(false);
     const [userMenuExpanded, setUserMenuExpanded] = useState<boolean>(false);
 
@@ -36,7 +39,11 @@ const UserMenu: FunctionComponent = () => {
                     className="rounded-full shadow"
                     width={40}
                     height={40}
-                    src="https://res.cloudinary.com/stevancorre/image/upload/v1664060971/default-user.jpg"
+                    objectFit="contain"
+                    src={
+                        user?.profilePicture ??
+                        "https://res.cloudinary.com/stevancorre/image/upload/v1664060971/default-user.jpg"
+                    }
                     alt="User photo"
                 />
             </button>
@@ -44,9 +51,11 @@ const UserMenu: FunctionComponent = () => {
                 <div className="absolute right-0 top-12 z-10 w-44 divide-y divide-gray-100 rounded border bg-white font-normal shadow">
                     <ul className="py-1 text-sm text-gray-700">
                         <li>
-                            <a href="#" className="block py-2 px-4 hover:bg-gray-100">
-                                Profile
-                            </a>
+                            <Link href="/me">
+                                <span className="block cursor-pointer py-2 px-4 hover:bg-gray-100">
+                                    Profile
+                                </span>
+                            </Link>
                         </li>
                     </ul>
                     <div className="py-1">
