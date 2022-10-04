@@ -3,6 +3,7 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { FunctionComponent, useEffect, useState } from "react";
 
+import { env } from "../../env/client.mjs";
 import { trpc } from "../../utils/trpc";
 import LoadingSpinner from "../spinners/LoadingSpinner";
 
@@ -40,10 +41,7 @@ const UserMenu: FunctionComponent = () => {
                     width={40}
                     height={40}
                     objectFit="contain"
-                    src={
-                        user?.profilePicture ??
-                        "https://res.cloudinary.com/stevancorre/image/upload/v1664060971/default-user.jpg"
-                    }
+                    src={user?.profilePicture ?? env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_PROFILE_PICTURE}
                     alt="User photo"
                 />
             </button>

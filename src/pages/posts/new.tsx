@@ -7,11 +7,9 @@ import { useForm } from "react-hook-form";
 
 import Header from "../../components/header/Header";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner";
+import { env } from "../../env/client.mjs";
 import { CreatePostFormInput, createPostFormSchema } from "../../schemas/post.schema";
 import { trpc } from "../../utils/trpc";
-
-const CLOUDINARY_UPLOAD_PRESET = "trpc-api";
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/stevancorre/image/upload";
 
 const NewPostPage: NextPage = () => {
     const router = useRouter();
@@ -31,10 +29,10 @@ const NewPostPage: NextPage = () => {
             formData.append("file", image);
             console.log(data.image);
 
-            formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+            formData.append("upload_preset", env.NEXT_PUBLIC_CLOUDINARY_POST_PRESET);
 
             setIsImageUploading(true);
-            fetch(CLOUDINARY_URL, {
+            fetch(env.NEXT_PUBLIC_CLOUDINARY_URL, {
                 method: "POST",
                 body: formData,
             })

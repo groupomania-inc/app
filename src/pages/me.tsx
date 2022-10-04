@@ -9,11 +9,9 @@ import { useForm } from "react-hook-form";
 import Header from "../components/header/Header";
 import FullPageLoadingSpinner from "../components/spinners/FullPageLoadingSpinner";
 import LoadingSpinner from "../components/spinners/LoadingSpinner";
+import { env } from "../env/client.mjs";
 import { UpdateUserFormInput, updateUserFormSchema } from "../schemas/user.schema";
 import { trpc } from "../utils/trpc";
-
-const CLOUDINARY_UPLOAD_PRESET = "trpc-api";
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/stevancorre/image/upload";
 
 const ProfilePage: NextPage = () => {
     const router = useRouter();
@@ -58,10 +56,10 @@ const ProfilePage: NextPage = () => {
             const formData = new FormData();
             formData.append("file", image);
 
-            formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+            formData.append("upload_preset", env.NEXT_PUBLIC_CLOUDINARY_PROFILE_PICTURE_PRESET);
 
             setIsImageUploading(true);
-            fetch(CLOUDINARY_URL, {
+            fetch(env.NEXT_PUBLIC_CLOUDINARY_URL, {
                 method: "POST",
                 body: formData,
             })
@@ -113,7 +111,7 @@ const ProfilePage: NextPage = () => {
                                 src={
                                     preview ??
                                     user?.profilePicture ??
-                                    "https://res.cloudinary.com/stevancorre/image/upload/v1664060971/default-user.jpg"
+                                    env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_PROFILE_PICTURE
                                 }
                                 alt="User photo"
                             />
@@ -190,7 +188,7 @@ const ProfilePage: NextPage = () => {
 
                         <div className="flex w-full gap-2">
                             <button
-                                disabled={!formState.isDirty || updateUserLoading || isImageUploading}
+                                disabled={updateUserLoading || isImageUploading}
                                 type="button"
                                 onClick={onCancel}
                                 className="ml-auto inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-600 active:bg-primary-700 disabled:cursor-not-allowed disabled:bg-primary-400 disabled:hover:bg-primary-400 disabled:active:bg-primary-400"
@@ -198,7 +196,7 @@ const ProfilePage: NextPage = () => {
                                 Annuler
                             </button>
                             <button
-                                disabled={!formState.isDirty || updateUserLoading || isImageUploading}
+                                disabled={updateUserLoading || isImageUploading}
                                 type="submit"
                                 className="ml-6   inline-flex h-10 w-40 cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-tertiary-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-tertiary-700 active:bg-tertiary-800 disabled:cursor-not-allowed disabled:bg-tertiary-400 disabled:hover:bg-tertiary-400 disabled:active:bg-tertiary-400"
                             >
