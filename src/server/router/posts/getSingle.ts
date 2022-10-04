@@ -10,6 +10,10 @@ export default createRouter().query("get-single", {
             where: {
                 id: input.postId,
             },
+            include: {
+                Likes: true,
+                User: true,
+            },
         });
 
         if (!post)

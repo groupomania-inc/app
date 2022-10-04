@@ -30,7 +30,9 @@ export type CreatePostInput = z.TypeOf<typeof createPostSchema>;
 export type CreatePostFormInput = z.TypeOf<typeof createPostFormSchema>;
 
 export const updatePostSchema = createPostSchema.extend(postSchema.shape);
+export const updatePostFormSchema = createPostFormSchema.extend(postSchema.shape);
 export type UpdatePostInput = z.TypeOf<typeof updatePostSchema>;
+export type UpdatePostFormInput = z.TypeOf<typeof updatePostFormSchema>;
 
 export const getSinglePostSchema = postSchema.extend({});
 

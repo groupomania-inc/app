@@ -12,6 +12,7 @@ export default createRouter().mutation("update", {
             },
             data: {
                 body: input.body,
+                image: input.image,
                 edited: true,
             },
         });
