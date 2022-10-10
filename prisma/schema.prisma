@@ -48,5 +48,5 @@ model Like {
   User   User   @relation(fields: [userId], references: [id])
   userId String
   postId String
-  Post   Post   @relation(fields: [postId], references: [id])
+  Post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
