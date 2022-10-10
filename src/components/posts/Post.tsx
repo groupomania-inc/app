@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { FunctionComponent, useEffect, useState } from "react";
 
+import { formatDate } from "../../utils/posts";
 import { trpc } from "../../utils/trpc";
 import { formatDisplayName, formatUsername, getProfilePicture } from "../../utils/user";
 
@@ -137,7 +138,7 @@ const Post: FunctionComponent<PostParams> = ({ post }) => {
                 </div>
 
                 <span className="leading-6">
-                    {formatUsername(post.User)} • {post.createdAt.toLocaleDateString("fr-FR")}{" "}
+                    {formatUsername(post.User)} • {formatDate(post.createdAt)}{" "}
                     {post.edited ? "(modifié)" : ""}
                 </span>
             </footer>

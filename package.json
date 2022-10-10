@@ -23,6 +23,7 @@
         "@types/inquirer": "^9.0.1",
         "argon2": "^0.29.1",
         "inquirer": "^9.1.1",
+        "moment": "^2.29.4",
         "next": "12.2.5",
         "next-auth": "^4.10.3",
         "react": "18.2.0",
