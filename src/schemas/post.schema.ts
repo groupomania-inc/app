@@ -11,20 +11,17 @@ export const createPostSchema = z.object({
         .string({ required_error: "Le champ titre est requis" })
         .min(1, "Le champ texte est requis")
         .max(1024, "Le texte ne peut pas faire plus de 1024 caractères"),
-    image: z.string().optional(),
+    image: z.string(),
 });
 export const createPostFormSchema = createPostSchema.extend({
     image: z
         .any()
+        .refine((files) => files?.[0], "Une image est requise lors de la création d'un post")
         .refine(
-            (files) => !files?.[0] || files?.[0]?.size <= MAX_FILE_SIZE * 1e6,
+            (files) => files?.[0]?.size <= MAX_FILE_SIZE * 1e6,
             `La taille maximum est ${MAX_FILE_SIZE}mb`,
         )
-        .refine(
-            (files) => !files?.[0] || files?.[0]?.type.startsWith("image/"),
-            `Une image est attendue ${MAX_FILE_SIZE}`,
-        )
-        .optional(),
+        .refine((files) => files?.[0]?.type.startsWith("image/"), `Une image est attendue ${MAX_FILE_SIZE}`),
 });
 export type CreatePostInput = z.TypeOf<typeof createPostSchema>;
 export type CreatePostFormInput = z.TypeOf<typeof createPostFormSchema>;
